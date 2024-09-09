@@ -57,6 +57,7 @@ func GenerateConfig() {
 	v.SetDefault("DataSource.Type", "mysql")
 	v.SetDefault("DataSource.Username", "root")
 	v.SetDefault("DataSource.Password", "123456")
+	v.SetDefault("DataSource.Dbname", "ninelink")
 	err := v.WriteConfig()
 	if err != nil {
 		return
