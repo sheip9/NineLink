@@ -11,10 +11,11 @@ import (
 
 var (
 	db *gorm.DB
+	Db = &db
 	c  = config.Conf
 )
 
-func GetDB() *gorm.DB {
+func InitDB() *gorm.DB {
 	ds := (*c).DataSource
 	if db != nil {
 		return db
@@ -39,7 +40,6 @@ func GetDB() *gorm.DB {
 	default:
 		panic("")
 	}
-	//_ = _db.AutoMigrate(&entity.Record{})
 	db = _db
 	return _db
 }

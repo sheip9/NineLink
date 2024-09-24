@@ -5,5 +5,5 @@ import (
 )
 
 var (
-	db = utils.GetDB()
+	db = utils.Db
 )

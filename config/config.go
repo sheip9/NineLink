@@ -1,7 +1,6 @@
 package config
 
 import (
-	"flag"
 	"github.com/spf13/viper"
 	"log"
 )
@@ -20,26 +19,19 @@ type Config struct {
 }
 
 var (
-	conf       *Config
-	v          = viper.New()
-	configFile *string
-	Conf       **Config = &conf
+	conf *Config
+	Conf = &conf
+	v    = viper.New()
+	File string
 )
 
 func init() {
-	configFile = flag.String("c", "./config.yml", "Path to config file")
-	flag.Parse()
 	v.AutomaticEnv()
 	v.SetConfigType("yaml")
 }
-func GetConfig() *Config {
-	if conf != nil {
-		return conf
-	}
-	return ReadConfig(*configFile)
-}
-func ReadConfig(path string) *Config {
-	v.SetConfigFile(path)
+
+func ReadConfig() *Config {
+	v.SetConfigFile(File)
 	if err := v.ReadInConfig(); err != nil {
 		GenerateConfig()
 		panic("配置文件文件不存在: " + err.Error())
@@ -49,7 +41,7 @@ func ReadConfig(path string) *Config {
 		panic("配置文件反序列化失败: " + err.Error())
 	}
 
-	log.Println("配置文件内容加载成功: ", path)
+	log.Println("配置文件内容加载成功: ", File)
 	return conf
 }
 func GenerateConfig() {
