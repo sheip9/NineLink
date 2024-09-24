@@ -3,7 +3,6 @@ package app
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sheip9/ninelink/pkg/entity"
-	"net/http"
 )
 
 func GetRecord(c *gin.Context) {
@@ -11,7 +10,7 @@ func GetRecord(c *gin.Context) {
 	var record *entity.Record = nil
 	err := (*db).First(&record, "path = ?", path).Error
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"message": "Record not found"})
+		c.HTML(404, "404.html", gin.H{})
 	}
 	c.Redirect(302, record.Value)
 }
