@@ -20,11 +20,15 @@ type Config struct {
 }
 
 var (
-	conf *Config
-	v    = viper.New()
+	conf       *Config
+	v          = viper.New()
+	configFile *string
+	Conf       **Config = &conf
 )
 
 func init() {
+	configFile = flag.String("c", "./config.yml", "Path to config file")
+	flag.Parse()
 	v.AutomaticEnv()
 	v.SetConfigType("yaml")
 }
@@ -32,7 +36,6 @@ func GetConfig() *Config {
 	if conf != nil {
 		return conf
 	}
-	configFile := flag.String("c", "./config.yml", "Path to config file")
 	return ReadConfig(*configFile)
 }
 func ReadConfig(path string) *Config {

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"NineLink/internal/server"
+	"github.com/sheip9/ninelink/internal/server"
 	"golang.org/x/sync/errgroup"
 	"log"
 )
@@ -11,7 +11,6 @@ var (
 )
 
 func main() {
-	//gin.SetMode(gin.ReleaseMode)
 	appServer := server.AppServer()
 	g.Go(func() error {
 		return appServer.ListenAndServe()

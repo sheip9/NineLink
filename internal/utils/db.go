@@ -1,9 +1,8 @@
 package utils
 
 import (
-	"NineLink/config"
-	"NineLink/pkg/entity"
 	"fmt"
+	"github.com/sheip9/ninelink/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -12,11 +11,11 @@ import (
 
 var (
 	db *gorm.DB
-	c  = config.GetConfig()
+	c  = config.Conf
 )
 
 func GetDB() *gorm.DB {
-	ds := c.DataSource
+	ds := (*c).DataSource
 	if db != nil {
 		return db
 	}
@@ -24,7 +23,7 @@ func GetDB() *gorm.DB {
 		Logger: logger.Default.LogMode(logger.Silent),
 	}
 	var _db *gorm.DB
-	switch c.DataSource.Type {
+	switch (*c).DataSource.Type {
 	case "mysql":
 		dsn := fmt.Sprintf(
 			"%s:%s@tcp(%s:%s)/%s",
@@ -40,7 +39,7 @@ func GetDB() *gorm.DB {
 	default:
 		panic("")
 	}
-	_ = _db.AutoMigrate(&entity.Record{})
+	//_ = _db.AutoMigrate(&entity.Record{})
 	db = _db
 	return _db
 }

@@ -1,8 +1,8 @@
 package app
 
 import (
-	"NineLink/pkg/entity"
 	"github.com/gin-gonic/gin"
+	"github.com/sheip9/ninelink/pkg/entity"
 	"net/http"
 )
 

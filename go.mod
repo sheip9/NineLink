@@ -1,4 +1,4 @@
-module NineLink
+module github.com/sheip9/ninelink
 
 go 1.21.0
 

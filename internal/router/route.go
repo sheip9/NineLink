@@ -1,9 +1,9 @@
 package router
 
 import (
-	"NineLink/internal/handler/app"
-	"NineLink/internal/middleware"
 	"github.com/gin-gonic/gin"
+	"github.com/sheip9/ninelink/internal/handler/app"
+	"github.com/sheip9/ninelink/internal/middleware"
 )
 
 func AppRouter() *gin.Engine {

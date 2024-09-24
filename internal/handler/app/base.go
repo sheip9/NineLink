@@ -1,7 +1,7 @@
 package app
 
 import (
-	"NineLink/internal/utils"
+	"github.com/sheip9/ninelink/internal/utils"
 )
 
 var (
