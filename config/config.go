@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/sheip9/ninelink/internal/enum"
 	"github.com/spf13/viper"
 	"log"
 )
@@ -11,7 +12,7 @@ type Config struct {
 	DataSource struct {
 		Host     string
 		Port     string
-		Type     string
+		Type     enum.DBType
 		Username string
 		Password string
 		Dbname   string

@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"github.com/sheip9/ninelink/config"
+	"github.com/sheip9/ninelink/internal/enum"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -27,23 +28,23 @@ func InitDB() *gorm.DB {
 	return db
 }
 
-func CreateDBInstance(dbType string, username string, password string, host string, port string, dbName string, gormConfig *gorm.Config) *gorm.DB {
+func CreateDBInstance(dbType enum.DBType, username string, password string, host string, port string, dbName string, gormConfig *gorm.Config) *gorm.DB {
 	var _db *gorm.DB
 	switch dbType {
-	case "mysql":
+	case enum.MySQL:
 		dsn := fmt.Sprintf(
 			"%s:%s@tcp(%s:%s)/%s",
 			username, password, host, port, dbName,
 		)
 		_db, _ = gorm.Open(mysql.Open(dsn), gormConfig)
-	case "postgres":
+	case enum.Postgres:
 		dsn := fmt.Sprintf(
 			"user=%s password=%s host=%s port=%s dbname=%s",
 			username, password, host, port, dbName,
 		)
 		_db, _ = gorm.Open(postgres.Open(dsn), gormConfig)
 	default:
-		_ = fmt.Errorf("")
+		_ = fmt.Errorf("数据库类型错误，可用值：%s, %s", enum.MySQL, enum.Postgres)
 		return nil
 	}
 	return _db
