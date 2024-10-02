@@ -24,16 +24,16 @@ func InitDB() *gorm.DB {
 	var gormConfig = &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	}
-	db = CreateDBInstance(ds.Type, ds.Username, ds.Password, ds.Host, ds.Port, ds.Dbname, gormConfig)
+	db = CreateDBInstance(ds.Type, ds.Username, ds.Password, ds.Host, ds.Port, ds.DbName, gormConfig)
 	return db
 }
 
-func CreateDBInstance(dbType enum.DBType, username string, password string, host string, port string, dbName string, gormConfig *gorm.Config) *gorm.DB {
+func CreateDBInstance(dbType enum.DBType, username string, password string, host string, port uint16, dbName string, gormConfig *gorm.Config) *gorm.DB {
 	var _db *gorm.DB
 	switch dbType {
 	case enum.MySQL:
 		dsn := fmt.Sprintf(
-			"%s:%s@tcp(%s:%s)/%s",
+			"%s:%s@tcp(%s:%d)/%s",
 			username, password, host, port, dbName,
 		)
 		_db, _ = gorm.Open(mysql.Open(dsn), gormConfig)

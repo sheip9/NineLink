@@ -11,11 +11,11 @@ type Config struct {
 	Port       string
 	DataSource struct {
 		Host     string
-		Port     string
+		Port     uint16
 		Type     enum.DBType
 		Username string
 		Password string
-		Dbname   string
+		DbName   string
 	}
 }
 
@@ -53,7 +53,7 @@ func GenerateConfig() {
 	v.SetDefault("DataSource.Type", "mysql")
 	v.SetDefault("DataSource.Username", "root")
 	v.SetDefault("DataSource.Password", "123456")
-	v.SetDefault("DataSource.Dbname", "ninelink")
+	v.SetDefault("DataSource.DbName", "ninelink")
 	err := v.WriteConfig()
 	if err != nil {
 		return
