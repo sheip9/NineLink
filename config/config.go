@@ -10,7 +10,7 @@ import (
 
 type Config struct {
 	IP         string
-	Port       string
+	Port       uint16
 	Debug      bool
 	DataSource struct {
 		Host     string
