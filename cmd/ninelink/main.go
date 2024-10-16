@@ -19,8 +19,8 @@ func main() {
 	flag.Parse()
 	startInitApp()
 
-	appServer := server.AppServer()
 	gin.SetMode((*config.Conf).GetGinMode())
+	appServer := server.AppServer()
 	g.Go(func() error {
 		return appServer.ListenAndServe()
 	})
