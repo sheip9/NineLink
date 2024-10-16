@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/gin-gonic/gin"
 	"github.com/sheip9/ninelink/config"
 	"github.com/sheip9/ninelink/internal/server"
 	"github.com/sheip9/ninelink/internal/utils"
@@ -19,6 +20,7 @@ func main() {
 	startInitApp()
 
 	appServer := server.AppServer()
+	gin.SetMode((*config.Conf).GetGinMode())
 	g.Go(func() error {
 		return appServer.ListenAndServe()
 	})

@@ -1,14 +1,17 @@
 package config
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/sheip9/ninelink/internal/enum"
 	"github.com/spf13/viper"
+	"gorm.io/gorm/logger"
 	"log"
 )
 
 type Config struct {
 	IP         string
 	Port       string
+	Debug      bool
 	DataSource struct {
 		Host     string
 		Port     uint16
@@ -17,6 +20,19 @@ type Config struct {
 		Password string
 		DbName   string
 	}
+}
+
+func (c Config) GetGinMode() string {
+	if c.Debug {
+		return gin.DebugMode
+	}
+	return gin.ReleaseMode
+}
+func (c Config) GetGormMode() logger.LogLevel {
+	if c.Debug {
+		return logger.Info
+	}
+	return logger.Error
 }
 
 var (
@@ -47,9 +63,10 @@ func ReadConfig() *Config {
 }
 func GenerateConfig() {
 	v.SetDefault("IP", "")
-	v.SetDefault("Port", "8080")
+	v.SetDefault("Port", 8080)
+	v.SetDefault("Debug", false)
 	v.SetDefault("DataSource.Host", "127.0.0.1")
-	v.SetDefault("DataSource.Port", "3306")
+	v.SetDefault("DataSource.Port", 3306)
 	v.SetDefault("DataSource.Type", "mysql")
 	v.SetDefault("DataSource.Username", "root")
 	v.SetDefault("DataSource.Password", "123456")

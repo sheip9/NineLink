@@ -22,7 +22,7 @@ func InitDB() *gorm.DB {
 	}
 	ds := (*c).DataSource
 	var gormConfig = &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Silent),
+		Logger: logger.Default.LogMode((*config.Conf).GetGormMode()),
 	}
 	db = CreateDBInstance(ds.Type, ds.Username, ds.Password, ds.Host, ds.Port, ds.DbName, gormConfig)
 	return db
