@@ -39,7 +39,7 @@ func CreateDBInstance(dbType enum.DBType, username string, password string, host
 		_db, _ = gorm.Open(mysql.Open(dsn), gormConfig)
 	case enum.Postgres:
 		dsn := fmt.Sprintf(
-			"user=%s password=%s host=%s port=%s dbname=%s",
+			"user=%s password=%s host=%s port=%d dbname=%s",
 			username, password, host, port, dbName,
 		)
 		_db, _ = gorm.Open(postgres.Open(dsn), gormConfig)
