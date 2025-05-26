@@ -5,7 +5,7 @@ go 1.23.0
 toolchain go1.24.1
 
 require (
-	github.com/gin-gonic/gin v1.10.0
+	github.com/gin-gonic/gin v1.10.1
 	github.com/spf13/viper v1.19.0
 	golang.org/x/sync v0.16.0
 	gorm.io/driver/mysql v1.5.7
