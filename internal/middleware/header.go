@@ -5,9 +5,7 @@ import (
 	"github.com/sheip9/ninelink/internal/constant"
 )
 
-func WithHeaderDealing() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Header("X-Powered-By", "NineLink"+constant.Version)
-		c.Next()
-	}
+func WithHeaderDealing(c *gin.Context) {
+	c.Header("X-Powered-By", "NineLink"+constant.Version)
+	c.Next()
 }

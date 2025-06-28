@@ -8,7 +8,8 @@ import (
 
 func AppRouter() *gin.Engine {
 	r := gin.New()
-	r.Use(middleware.WithHeaderDealing())
+	r.Use(middleware.WithHeaderDealing)
+	r.Use(middleware.AcceptHeader)
 	r.GET("/", app.GetIndex)
 	r.GET("/:path", app.GetRecord)
 	return r
