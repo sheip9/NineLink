@@ -6,6 +6,6 @@ import (
 )
 
 func WithHeaderDealing(c *gin.Context) {
-	c.Header("X-Powered-By", "NineLink"+constant.Version)
+	c.Header("X-Powered-By", "NineLink"+constant.GetVersion())
 	c.Next()
 }

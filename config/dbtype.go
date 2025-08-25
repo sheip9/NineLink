@@ -1,4 +1,4 @@
-package enum
+package config
 
 type DBType string
 

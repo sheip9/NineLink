@@ -2,12 +2,12 @@ package config
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sheip9/ninelink/internal/enum"
 	"github.com/spf13/viper"
 	"gorm.io/gorm/logger"
 	"log"
 )
 
+// Config 应用程序配置结构体
 type Config struct {
 	IP         string
 	Port       uint16
@@ -15,19 +15,22 @@ type Config struct {
 	DataSource struct {
 		Host     string
 		Port     uint16
-		Type     enum.DBType
+		Type     DBType
 		Username string
 		Password string
 		DbName   string
 	}
 }
 
+// GetGinMode 返回Gin框架的运行模式
 func (c Config) GetGinMode() string {
 	if c.Debug {
 		return gin.DebugMode
 	}
 	return gin.ReleaseMode
 }
+
+// GetGormMode 返回GORM的日志级别
 func (c Config) GetGormMode() logger.LogLevel {
 	if c.Debug {
 		return logger.Info
@@ -36,30 +39,30 @@ func (c Config) GetGormMode() logger.LogLevel {
 }
 
 var (
-	conf *Config
-	Conf = &conf
+	Conf *Config
 	v    = viper.New()
 	File string
 )
 
+// init 初始化viper配置
 func init() {
 	v.AutomaticEnv()
 	v.SetConfigType("yaml")
 }
 
-func ReadConfig() *Config {
+func InitConfig() *Config {
 	v.SetConfigFile(File)
 	if err := v.ReadInConfig(); err != nil {
 		GenerateConfig()
 		panic("配置文件文件不存在: " + err.Error())
 	}
 
-	if err := v.Unmarshal(&conf); err != nil {
+	if err := v.Unmarshal(&Conf); err != nil {
 		panic("配置文件反序列化失败: " + err.Error())
 	}
 
 	log.Println("配置文件内容加载成功: ", File)
-	return conf
+	return Conf
 }
 func GenerateConfig() {
 	v.SetDefault("IP", "")

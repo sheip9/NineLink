@@ -6,11 +6,16 @@ import (
 	"github.com/sheip9/ninelink/internal/middleware"
 )
 
+// AppRouter 创建并配置应用路由
 func AppRouter() *gin.Engine {
-	r := gin.New()
+	r := gin.Default()
+
+	// 使用中间件
 	r.Use(middleware.WithHeaderDealing)
-	r.Use(middleware.AcceptHeader)
+
+	// 注册路由
 	r.GET("/", app.GetIndex)
 	r.GET("/:path", app.GetRecord)
+
 	return r
 }
