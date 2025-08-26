@@ -25,7 +25,7 @@ func GetRecord(c *gin.Context) {
 		if recordErr != nil {
 			c.XML(http.StatusNotFound, gin.H{})
 		} else {
-			c.JSON(http.StatusOK, record)
+			c.XML(http.StatusOK, record)
 		}
 	default:
 		if recordErr != nil {
