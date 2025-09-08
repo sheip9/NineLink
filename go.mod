@@ -7,7 +7,7 @@ toolchain go1.24.1
 require (
 	github.com/gin-gonic/gin v1.10.1
 	github.com/spf13/viper v1.20.1
-	golang.org/x/sync v0.16.0
+	golang.org/x/sync v0.17.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.30.1
